@@ -7,16 +7,17 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 export default function Login() {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const [user,setUser] = useState(null)
+    const [user,setUser] = useState("")
 
     const logIn = (e) =>{
         e.preventDefault();
         signInWithEmailAndPassword(auth,email,password)
         .then((userCredential)=>{
-            console.log(userCredential)
-        }).catch((error)=>{
             const loggedInUser = userCredential.user;
             setUser(loggedInUser);
+            console.log(userCredential)
+        }).catch((error)=>{
+            console.log(error)
         })
 
     }
@@ -33,7 +34,7 @@ export default function Login() {
         <p>Welcome,{user.email}</p>
 
     ):(
-        <p> Your are not Login</p>
+        <p> Your are not Login In</p>
     )}
     </div>
   )
